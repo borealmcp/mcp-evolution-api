@@ -7,7 +7,7 @@ COPY package*.json ./
 RUN npm ci --only=production
 
 # Copiar arquivos de código compilado
-COPY dist ./dist
+COPY src ./src
 
 # Definir variáveis de ambiente padrão
 ENV NODE_ENV=production
@@ -16,4 +16,4 @@ ENV NODE_ENV=production
 EXPOSE 3000
 
 # Comando para iniciar o servidor
-CMD ["node", "dist/index.js"] 
+CMD ["node", "src/index.js"] 
