@@ -3,17 +3,16 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Copiar arquivos de dependências
-COPY package*.json ./
-RUN npm ci --only=production
+COPY package.json package-lock.json ./
 
-# Copiar arquivos de código compilado
+# Instala dependências de produção sem exigir lock perfeito
+RUN npm install --omit=dev --no-audit --no-fund
+
+# Copiar código
 COPY src ./src
 
-# Definir variáveis de ambiente padrão
 ENV NODE_ENV=production
 
-# Expor a porta para WebSocket (opcional, usada se WebSocket estiver habilitado)
 EXPOSE 3000
 
-# Comando para iniciar o servidor
-CMD ["node", "src/index.js"] 
+CMD ["node", "src/index.js"]
