@@ -8,7 +8,6 @@ RUN npm ci --only=production
 
 # Copiar arquivos de código compilado
 COPY dist ./dist
-COPY .env.example ./.env.example
 
 # Definir variáveis de ambiente padrão
 ENV NODE_ENV=production
