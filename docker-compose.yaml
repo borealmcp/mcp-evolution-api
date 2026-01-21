@@ -18,7 +18,7 @@ services:
       - dokploy-network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.mcp-evolution-api.rule=Host(`mcp-evolution-api.dokploy.com`)"
+      - "traefik.http.routers.mcp-evolution-api.rule=Host(`evolutionmcp.boreal.ia.br`)"
       - "traefik.http.routers.mcp-evolution-api.entrypoints=websecure"
       - "traefik.http.routers.mcp-evolution-api.tls.certResolver=letsencrypt"
       - "traefik.http.services.mcp-evolution-api.loadbalancer.server.port=3001"
