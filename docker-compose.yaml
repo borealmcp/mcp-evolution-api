@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  mcp-evolution-api:
+    container_name: mcp-evolution-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    networks:
+      - dokploy-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mcp-evolution-api.rule=Host(`mcp-evolution-api.dokploy.com`)"
+      - "traefik.http.routers.mcp-evolution-api.entrypoints=websecure"
+      - "traefik.http.routers.mcp-evolution-api.tls.certResolver=letsencrypt"
+      - "traefik.http.services.mcp-evolution-api.loadbalancer.server.port=3000"
+
+networks:
+  dokploy-network:
+    external: true
